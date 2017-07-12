@@ -1,0 +1,173 @@
+      Predicted Positive	Predicted Negative
+Condition Positive	96	4
+Condition Negative	8	19
+
+96 +19 /108+19
+115 / 127
+
+0,906
+
+
+TP / TP+FP
+
+1. 0.99
+2. 0.906
+3. 0.923
+4. 0.96
+
+
+5
+print(m)
+print(m)
+weighted_prediction = m.predict(X_test)
+
+weighted_prediction = m.predict(X_test)
+precision, recall, threshold  = precision_recall_curve(y_test,weighted_prediction )
+plt.plot(recall, precision, label='label')
+plt.show()
+0.6
+
+6: (richtig)
+Model 1: Roc 1
+Model 2: Roc 3
+Model 3: Roc 2
+
+
+7: 
+missing parameter (line is at 0.5)
+
+8.
+
+print(m)
+weighted_prediction = m.predict(X_test)
+precision_score(y_test, weighted_prediction, average='micro')
+
+9. (alle)
+A model that always predicts the mean of y would get a score of 0.0
+Mean would pedict zero
+The best possible score is 1.0
+
+
+10:
+Precision 
+
+11
+/Recall 
+
+12:(falsch)
+A classifier is trained on an imbalanced multiclass dataset. After looking at the model’s precision scores, you find that the micro averaging is much smaller than the macro averaging score. Which of the following is most likely happening?
+The model is probably misclassifying the infrequent labels more than the frequent labels.
+
+print(m)
+weighted_prediction = m.predict(X_test)
+precision_score(y_test, weighted_prediction, average='micro')
+
+13.
+grid_values = {'gamma': [0.01, 0.1, 1, 10]}
+
+grid_clf_acc = GridSearchCV(m, param_grid = grid_values,scoring='recall'')
+
+grid_clf_acc.fit(X_train, y_train)
+y_decision_fn_scores_acc = grid_clf_acc.decision_function(X_test)
+
+print('Grid best parameter (max. accuracy): ', grid_clf_acc.best_params_)
+print('Grid best score (accuracy): ', grid_clf_acc.best_score_)
+
+
+clf = svm.SVC(kernel="rbf" , C = 1 , gamma = 1, probability = True)
+from sklearn.grid_search import GridSearchCV
+
+gamma_range = [0.01, 0.1, 1, 10]
+c_range = [1]
+param_grid = dict(gamma = gamma_range, c = c_range)
+print param_grid
+grid = GridSearchCV(m, param_grid, cv= 10, scoring="precision")
+grid.fit(X_norm, y)
+
+
+6. (richtig)
+12 (richtig)
+
+
+
+13:
+---------
+
+
+grid_values = {'gamma': [0.01, 0.1, 1, 10]}
+grid_clf_acc = GridSearchCV(m, param_grid = grid_values,scoring='recall')
+
+y_pred = grid_clf_acc.fit(X_train, y_train)
+print('Grid best parameter (max. accuracy): ', grid_clf_acc.best_params_)
+print('Grid best score (accuracy): ', grid_clf_acc.best_score_)
+
+grid_values = {'gamma': [10]}
+grid_clf_acc = GridSearchCV(m, param_grid = grid_values,scoring='precision')
+
+y_pred = grid_clf_acc.fit(X_train, y_train)
+print('Grid best parameter (max. accuracy): ', grid_clf_acc.best_params_)
+print('Grid best score (accuracy): ', grid_clf_acc.best_score_)
+
+
+
+gamma_range = [0.01, 0.1, 1, 10]
+c_range = [1]
+grid_values = dict(gamma = gamma_range, c = c_range)
+
+for i, eval_metric in enumerate(('precision','recall', 'f1','roc_auc')):
+    grid_clf_custom = GridSearchCV(m, param_grid=grid_values, scoring=eval_metric)
+    grid_clf_custom.fit(X_train, y_train)
+    print('Grid best parameter (max. {0}): {1}'
+          .format(eval_metric, grid_clf_custom.best_params_))
+    print('Grid best score ({0}): {1}'
+          .format(eval_metric, grid_clf_custom.best_score_))
+
+
+
+
+def testPosValueMetric(clf, X_test, y_test):
+    success =0
+    fail = 0
+    for i in range(len(y_test)):
+        if y_test[i] == 1:
+            if clf.predict(X_test[i].reshape(1,-1)) == 1:
+                success += 1
+            else:
+                fail +=1
+
+    return (success/(success+fail))
+
+    def recall(clf, X_test, y_test):
+    tp =0
+    fp = 0
+    for i in range(len(y_test)):
+        if y_test[i] == 1:
+            if clf.predict(X_test[i].reshape(1,-1)) == 1:
+                tp += 1
+            else:
+                fp +=1
+
+    tn =0
+    fn = 0
+    for i in range(len(y_test)):
+        if y_test[i] == 0:
+            if clf.predict(X_test[i].reshape(1,-1)) == 0:
+                tn += 1
+            else:
+                fn +=1
+
+    return (tp/(tp+fn))
+
+    gamma_range = [0.01, 0.1, 1, 10]
+    c_range = [1]
+    grid_values = dict(gamma = gamma_range, c = c_range)
+
+
+    for i, eval_metric in enumerate(('precision','recall', 'f1','roc_auc')):
+      grid_clf_custom = GridSearchCV(m, param_grid=grid_values, scoring=eval_metric)
+      grid_clf_custom.fit(X_train, y_train)
+
+      print('Grid best parameter (max. {0}): {1}'
+              .format(eval_metric, grid_clf_custom.best_params_))
+      print('Grid best score ({0}): {1}'
+              .format(eval_metric, grid_clf_custom.best_score_))
